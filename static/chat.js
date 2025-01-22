@@ -1,12 +1,17 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chat-messages');
     const chatForm = document.getElementById('chat-form');
     const userInput = document.getElementById('user-input');
     const typingIndicator = document.getElementById('typing-indicator');
+    const messageSound = document.getElementById('message-sound');
+    const voiceToggle = document.getElementById('voice-toggle');
     let userId = localStorage.getItem('userId') || generateUserId();
 
     function generateUserId() {
-        return Math.random().toString(36).substring(2) + Date.now().toString(36);
+        const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+        localStorage.setItem('userId', id);
+        return id;
     }
 
     chatForm.addEventListener('submit', async (e) => {
@@ -35,6 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             hideTypingIndicator();
+            
+            if (messageSound && messageSound.play) {
+                messageSound.play().catch(e => console.log('Error playing sound:', e));
+            }
+            
             appendMessage('morpheus', data.text_response, data.audio_response);
         } catch (error) {
             console.error('Error:', error);
@@ -77,15 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function animateMorpheusAvatar(avatar) {
-        avatar.classList.add('talking');
-        setTimeout(() => {
-            avatar.classList.remove('talking');
-        }, 2000);
-    }
-
     function playAudioResponse(base64Audio, playButton) {
-        if (voiceToggle.checked) {
+        if (voiceToggle && voiceToggle.checked) {
             playButton.disabled = true;
             playButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
@@ -108,5 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function hideTypingIndicator() {
         typingIndicator.classList.add('hidden');
+    }
+
+    function animateMorpheusAvatar(avatar) {
+        avatar.classList.add('talking');
+        setTimeout(() => {
+            avatar.classList.remove('talking');
+        }, 2000);
     }
 });
