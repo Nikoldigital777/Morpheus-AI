@@ -380,13 +380,26 @@ body, html {
     transform: scale(1.1);
 }
 
+.audio-response {
+    display: block;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 255, 0, 0.2);
+}
+
 .play-audio {
     background: none;
     border: none;
     color: var(--matrix-green);
     cursor: pointer;
-    margin-left: 10px;
     font-size: 1.2em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.play-audio:hover {
+    background-color: rgba(0, 255, 0, 0.1);
 }
 
 #typing-indicator {

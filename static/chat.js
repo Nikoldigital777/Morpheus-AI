@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(sender, message, audioSrc = null) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
-        messageElement.style.opacity = '1';
-        messageElement.style.transition = 'opacity 0.3s ease-in';
-        
+        messageElement.style.opacity = '0';
+        messageElement.style.transform = 'translateY(20px)';
+
         const avatar = document.createElement('img');
         avatar.src = sender === 'user' ? '/static/images/user-avatar.png' : '/static/images/morpheus-avatar.png';
         avatar.alt = `${sender} avatar`;
@@ -71,11 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
         contentDiv.appendChild(textP);
 
         if (audioSrc && sender === 'morpheus') {
+            const audioDiv = document.createElement('div');
+            audioDiv.classList.add('audio-response');
             const playButton = document.createElement('button');
             playButton.innerHTML = '<i class="fas fa-play"></i>';
             playButton.classList.add('play-audio');
             playButton.addEventListener('click', () => playAudioResponse(audioSrc, playButton));
-            contentDiv.appendChild(playButton);
+            audioDiv.appendChild(playButton);
+            contentDiv.appendChild(audioDiv);
         }
 
         messageElement.appendChild(avatar);
