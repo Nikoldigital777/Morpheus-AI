@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chat-messages');
     const chatForm = document.getElementById('chat-form');
@@ -34,22 +33,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ user_id: userId, message: message }),
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
             const data = await response.json();
             hideTypingIndicator();
+
+            if (!response.ok || data.error) {
+                throw new Error(data.error || 'Failed to get response from Morpheus');
+            }
 
             if (messageSound && messageSound.play && voiceToggle.checked) {
                 messageSound.play().catch(e => console.log('Error playing sound:', e));
             }
 
-            appendMessage('morpheus', data.text_response, data.audio_response);
+            if (data.text_response) {
+                appendMessage('morpheus', data.text_response, data.audio_response);
+            } else {
+                throw new Error('Empty response from server');
+            }
         } catch (error) {
             console.error('Error:', error);
             hideTypingIndicator();
-            appendMessage('system', 'An error occurred. Please try again.');
+            appendMessage('system', `Error: ${error.message || 'Failed to communicate with Morpheus'}`);
         }
     }
 
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.classList.add('message', `${sender}-message`);
         messageElement.style.opacity = '0';
         messageElement.style.transform = 'translateY(20px)';
-        
+
         const avatar = document.createElement('img');
         avatar.src = sender === 'user' ? '/static/images/user-avatar.png' : '/static/images/morpheus-avatar.png';
         avatar.alt = `${sender} avatar`;
