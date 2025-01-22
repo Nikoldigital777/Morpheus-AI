@@ -1,0 +1,374 @@
+:root {
+    --matrix-green: #00ff00;
+    --background: #000000;
+    --highlight-green: #00cc00;
+    --red-pill: #ff0000;
+    --blue-pill: #0000ff;
+    --text-shadow: 0 0 10px var(--matrix-green);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Orbitron', 'Courier New', monospace;
+    background-color: var(--background);
+    color: var(--matrix-green);
+    overflow: hidden;
+}
+
+.chat-body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid var(--matrix-green);
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    text-shadow: var(--text-shadow);
+}
+
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 25px var(--matrix-green);
+}
+
+#chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.morpheus-message {
+    align-self: flex-start;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.message-content {
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.user-message .message-content {
+    background-color: rgba(0, 0, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.2);
+}
+
+.system-message {
+    align-self: center;
+    background-color: rgba(255, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    font-style: italic;
+}
+
+.input-container {
+    display: flex;
+    padding: 10px 0;
+}
+
+#chat-form {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--matrix-green);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--matrix-green);
+    border-radius: 25px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+#user-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--matrix-green);
+}
+
+#char-count {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    color: var(--matrix-green);
+}
+
+#send-button, #voice-input-button {
+    background-color: var(--matrix-green);
+    color: var(--background);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+#send-button:hover, #voice-input-button:hover {
+    background-color: var(--highlight-green);
+    transform: scale(1.1);
+}
+
+.play-audio {
+    background: none;
+    border: none;
+    color: var(--matrix-green);
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+#typing-indicator {
+    color: var(--matrix-green);
+    font-style: italic;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: rgba(0, 255, 0, 0.1);
+    border-radius: 15px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.wake-up-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--red-pill);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px var(--red-pill);
+}
+
+.wake-up-button:hover {
+    background-color: #ff3333;
+    transform: scale(1.05);
+}
+
+.memory-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--matrix-green);
+    color: var(--background);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--matrix-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.memory-button:hover {
+    background-color: var(--highlight-green);
+    transform: scale(1.1) rotate(360deg);
+}
+
+.settings-button {
+    background-color: transparent;
+    border: none;
+    color: var(--matrix-green);
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.settings-button:hover {
+    color: var(--highlight-green);
+    transform: scale(1.1);
+}
+
+.settings-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--matrix-green);
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.settings-panel.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.settings-panel h3 {
+    margin-top: 0;
+    color: var(--matrix-green);
+    text-shadow: var(--text-shadow);
+}
+
+.settings-panel label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--matrix-green);
+}
+
+.settings-panel input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+@keyframes talking {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.talking {
+    animation: talking 0.5s infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        width: 95%;
+        margin: 10px auto;
+    }
+    .message {
+        max-width: 90%;
+    }
+    .wake-up-button {
+        top: 10px;
+        right: 10px;
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+    .memory-button {
+        bottom: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+    }
+    .settings-panel {
+        right: 10px;
+        padding: 15px;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--matrix-green);
+    border-radius: 20px;
+    border: 3px solid var(--background);
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus styles for better accessibility */
+a:focus, button:focus, input:focus {
+    outline: 2px solid var(--highlight-green);
+    outline-offset: 2px;
+}
+
+/* Loading animation for audio playback */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}

@@ -1,0 +1,49 @@
+\chat.html: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpheus AI - Chat Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body class="chat-body">
+    <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+    <main class="chat-container">
+        <div id="chat-messages" role="log" aria-live="polite"></div>
+        <div id="typing-indicator" class="hidden" aria-hidden="true">Morpheus is typing...</div>
+        <div class="input-container">
+            <form id="chat-form">
+                <label for="user-input" class="sr-only">Enter your message</label>
+                <input type="text" id="user-input" placeholder="Enter your message..." required>
+                <button type="submit" id="send-button" aria-label="Send message">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </form>
+            <button id="voice-input-button" aria-label="Voice input">
+                <i class="fas fa-microphone" aria-hidden="true"></i>
+            </button>
+        </div>
+    </main>
+    <button id="memory-button" class="memory-button" aria-label="View conversation history">
+        <i class="fas fa-brain" aria-hidden="true"></i>
+    </button>
+    <button id="wake-up-button" class="wake-up-button">Wake Up</button>
+    <div id="settings-panel" class="settings-panel" hidden>
+        <h3>Settings</h3>
+        <label for="sound-toggle">
+            Sound: <input type="checkbox" id="sound-toggle" checked>
+        </label>
+        <label for="voice-toggle">
+            Text-to-Speech: <input type="checkbox" id="voice-toggle" checked>
+        </label>
+    </div>
+    <button id="settings-button" class="settings-button" aria-label="Settings">
+        <i class="fas fa-cog" aria-hidden="true"></i>
+    </button>
+    <audio id="message-sound" src="{{ url_for('static', filename='audio/message.mp3') }}" preload="auto"></audio>
+    <script src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
