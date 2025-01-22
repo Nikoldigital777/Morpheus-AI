@@ -4,45 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office File Converter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Morpheus AI - What is Real?</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <main class="container">
-        <header class="app-header">
-            <h1>Office File Converter</h1>
-            <p class="subtitle">Convert your Office documents to Markdown format</p>
-        </header>
-        
-        <div class="converter-card">
-            <div class="dropzone" id="drop-zone">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p>Drag and drop files here or</p>
-                <button class="upload-btn" onclick="document.getElementById('file-input').click()">Choose Files</button>
-                <input type="file" id="file-input" multiple hidden accept=".docx,.xlsx,.pptx,.pdf">
-                <p class="file-types">Supports: DOCX, XLSX, PPTX, PDF</p>
+<body class="landing-body">
+    <canvas id="matrix-canvas"></canvas>
+    <main class="content">
+        <h1 id="main-question">What is real?</h1>
+        <div class="pill-container">
+            <div class="pill-option">
+                <button id="red-pill-btn" class="pill-button red">Take the red pill</button>
             </div>
-
-            <div class="conversion-list" id="conversion-list">
-                <!-- Files will be listed here -->
+            <div class="pill-option">
+                <button id="blue-pill-btn" class="pill-button blue">Take the blue pill</button>
             </div>
-
-            <div class="actions">
-                <button id="convert-btn" class="primary-btn" disabled>
-                    <i class="fas fa-sync-alt"></i> Convert Files
-                </button>
-                <button id="download-all" class="secondary-btn" disabled>
-                    <i class="fas fa-download"></i> Download All
-                </button>
-            </div>
-        </div>
-
-        <div class="conversion-results" id="conversion-results">
-            <!-- Results will be shown here -->
         </div>
     </main>
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="{{ url_for('static', filename='landing.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+    <script src="{{ url_for('static', filename='landing.js') }}"></script>
 </body>
 </html>
