@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('matrix.js loaded');
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = '#00ff00';
+        ctx.fillStyle = '#0F0';
         ctx.font = `${fontSize}px monospace`;
 
         drops.forEach((y, i) => {
@@ -37,19 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
         animationId = requestAnimationFrame(animate);
     }
 
-    // Clear canvas initially
+    // Clear canvas initially and make it black
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Control animation with red pill button
-    const redPillButton = document.getElementById('red-pill-btn');
-    if (redPillButton) {
-        redPillButton.addEventListener('click', () => {
-            if (animationId === null) {
-                animate();
-            }
-        });
-    }
+    // Start animation only when red pill is clicked
+    document.addEventListener('click', (e) => {
+        if (e.target.id === 'red-pill-btn' && !animationId) {
+            animate();
+        }
+    });
 
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
