@@ -1,4 +1,4 @@
-\chat.html: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,12 +17,14 @@
             <form id="chat-form">
                 <label for="user-input" class="sr-only">Enter your message</label>
                 <input type="text" id="user-input" placeholder="Enter your message..." required>
-                <button type="submit" id="send-button" aria-label="Send message">
+                <button type="submit" id="send-button" aria-label="Send message" class="input-button">
                     <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    <span class="button-tooltip">Send Message</span>
                 </button>
             </form>
-            <button id="voice-input-button" aria-label="Voice input">
+            <button id="voice-input-button" aria-label="Voice input" class="input-button">
                 <i class="fas fa-microphone" aria-hidden="true"></i>
+                <span class="button-tooltip">Voice Input</span>
             </button>
         </div>
     </main>
