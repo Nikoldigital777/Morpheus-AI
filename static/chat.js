@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chat-messages');
     const chatForm = document.getElementById('chat-form');
@@ -40,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const data = await response.json();
             hideTypingIndicator();
-            
+
             if (messageSound && messageSound.play) {
                 messageSound.play().catch(e => console.log('Error playing sound:', e));
             }
-            
+
             appendMessage('morpheus', data.text_response, data.audio_response);
         } catch (error) {
             console.error('Error:', error);
@@ -56,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(sender, message, audioSrc = null) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
+        messageElement.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
 
         const avatar = document.createElement('img');
         avatar.src = sender === 'user' ? '/static/images/user-avatar.png' : '/static/images/morpheus-avatar.png';

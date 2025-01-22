@@ -38,16 +38,19 @@ body, html {
 
 .chat-container {
     width: 100%;
-    height: 100vh;
-    margin: 0;
-    padding: 20px 40px;
+    max-width: 1200px;
+    height: calc(100vh - 40px);
+    margin: 20px auto;
+    padding: 20px;
     background-color: rgba(0, 0, 0, 0.9);
-    border: none;
+    border: 1px solid var(--matrix-green);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     backdrop-filter: blur(10px);
     box-sizing: border-box;
     position: relative;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
 }
 
 #chat-messages {
@@ -72,11 +75,15 @@ body, html {
 }
 
 .message {
+    display: flex;
+    align-items: flex-start;
     margin: 15px 0;
     padding: 18px;
     border-radius: 18px;
     max-width: 80%;
     transition: transform 0.2s ease;
+    background-color: rgba(0, 255, 0, 0.05);
+    border: 1px solid var(--matrix-green);
 }
 
 .message:hover {
