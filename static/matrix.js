@@ -41,13 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Control animation with wake-up button
-    const wakeUpButton = document.getElementById('wake-up-button');
-    wakeUpButton.addEventListener('click', () => {
-        if (animationId === null) {
-            animate();
-        }
-    });
+    // Control animation with red pill button
+    const redPillButton = document.getElementById('red-pill-btn');
+    if (redPillButton) {
+        redPillButton.addEventListener('click', () => {
+            if (animationId === null) {
+                animate();
+            }
+        });
+    }
 
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
