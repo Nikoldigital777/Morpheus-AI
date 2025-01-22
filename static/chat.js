@@ -69,13 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         textP.textContent = message;
         contentDiv.appendChild(textP);
 
-        messageElement.appendChild(avatar);
-        messageElement.appendChild(contentDiv);
-
-        const chatMessages = document.getElementById('chat-messages');
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
         if (audioSrc && sender === 'morpheus') {
             const playButton = document.createElement('button');
             playButton.innerHTML = '<i class="fas fa-play"></i>';
@@ -87,10 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.appendChild(avatar);
         messageElement.appendChild(contentDiv);
 
+        const chatMessages = document.getElementById('chat-messages');
         chatMessages.appendChild(messageElement);
-        setTimeout(() => {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 0);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
         if (sender === 'morpheus') {
             animateMorpheusAvatar(avatar);
