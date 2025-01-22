@@ -16,16 +16,16 @@
         <div class="input-container">
             <form id="chat-form">
                 <label for="user-input" class="sr-only">Enter your message</label>
-                <input type="text" id="user-input" placeholder="Enter your message..." required>
+                <input type="text" id="user-input" placeholder="Enter your message..." required autocomplete="off">
                 <button type="submit" id="send-button" aria-label="Send message" class="input-button">
                     <i class="fas fa-paper-plane" aria-hidden="true"></i>
                     <span class="button-tooltip">Send Message</span>
                 </button>
+                <button type="button" id="voice-input-button" aria-label="Voice input" class="input-button">
+                    <i class="fas fa-microphone" aria-hidden="true"></i>
+                    <span class="button-tooltip">Voice Input</span>
+                </button>
             </form>
-            <button id="voice-input-button" aria-label="Voice input" class="input-button">
-                <i class="fas fa-microphone" aria-hidden="true"></i>
-                <span class="button-tooltip">Voice Input</span>
-            </button>
         </div>
     </main>
     <button id="memory-button" class="memory-button" aria-label="View conversation history">

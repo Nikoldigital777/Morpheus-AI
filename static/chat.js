@@ -69,6 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
         textP.textContent = message;
         contentDiv.appendChild(textP);
 
+        messageElement.appendChild(avatar);
+        messageElement.appendChild(contentDiv);
+
+        const chatMessages = document.getElementById('chat-messages');
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
         if (audioSrc && sender === 'morpheus') {
             const playButton = document.createElement('button');
             playButton.innerHTML = '<i class="fas fa-play"></i>';
