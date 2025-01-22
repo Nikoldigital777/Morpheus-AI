@@ -55,8 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(sender, message, audioSrc = null) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
-        messageElement.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
-
+        
         const avatar = document.createElement('img');
         avatar.src = sender === 'user' ? '/static/images/user-avatar.png' : '/static/images/morpheus-avatar.png';
         avatar.alt = `${sender} avatar`;
@@ -79,8 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         messageElement.appendChild(avatar);
         messageElement.appendChild(contentDiv);
-        chatMessages.appendChild(messageElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        const messagesContainer = document.getElementById('chat-messages');
+        if (messagesContainer) {
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
 
         if (sender === 'morpheus') {
             animateMorpheusAvatar(avatar);
