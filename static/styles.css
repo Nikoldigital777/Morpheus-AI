@@ -81,9 +81,21 @@ body, html {
     padding: 18px;
     border-radius: 18px;
     max-width: 80%;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
     background-color: rgba(0, 255, 0, 0.05);
     border: 1px solid var(--matrix-green);
+    opacity: 1;
+    position: relative;
+    z-index: 1;
+}
+
+#chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding: 20px;
+    height: calc(100vh - 150px);
 }
 
 .message:hover {

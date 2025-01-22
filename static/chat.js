@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(sender, message, audioSrc = null) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
+        messageElement.style.opacity = '1';
+        messageElement.style.transition = 'opacity 0.3s ease-in';
         
         const avatar = document.createElement('img');
         avatar.src = sender === 'user' ? '/static/images/user-avatar.png' : '/static/images/morpheus-avatar.png';
