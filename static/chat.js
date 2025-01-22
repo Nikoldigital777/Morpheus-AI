@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Network response was not ok');
             }
 
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error('Response was not JSON');
+            }
+
             const data = await response.json();
             hideTypingIndicator();
 
