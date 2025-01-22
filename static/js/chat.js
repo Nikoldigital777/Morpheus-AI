@@ -75,11 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
         contentDiv.appendChild(textP);
 
         if (audioSrc && sender === 'morpheus') {
+            const audioDiv = document.createElement('div');
+            audioDiv.classList.add('audio-controls');
             const playButton = document.createElement('button');
             playButton.innerHTML = '<i class="fas fa-play"></i>';
             playButton.classList.add('play-audio');
             playButton.addEventListener('click', () => playAudioResponse(audioSrc, playButton));
-            contentDiv.appendChild(playButton);
+            audioDiv.appendChild(playButton);
+            contentDiv.appendChild(audioDiv);
         }
 
         messageElement.appendChild(avatar);
