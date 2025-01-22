@@ -2,27 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chat-messages');
     const chatForm = document.getElementById('chat-form');
     const userInput = document.getElementById('user-input');
-    const voiceInputButton = document.getElementById('voice-input-button');
-    const memoryButton = document.getElementById('memory-button');
-    const wakeUpButton = document.getElementById('wake-up-button');
-    const settingsButton = document.getElementById('settings-button');
-    const settingsPanel = document.getElementById('settings-panel');
-    const soundToggle = document.getElementById('sound-toggle');
-    const voiceToggle = document.getElementById('voice-toggle');
-    const messageSound = document.getElementById('message-sound');
     const typingIndicator = document.getElementById('typing-indicator');
-
-    let isListening = false;
-    let recognition;
     let userId = localStorage.getItem('userId') || generateUserId();
 
-    // Speech recognition setup (unchanged)
+    function generateUserId() {
+        return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
 
-    chatForm.addEventListener('submit', (e) => {
+    chatForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const message = userInput.value.trim();
         if (message) {
-            sendMessage(message);
+            await sendMessage(message);
             userInput.value = '';
         }
     });
@@ -45,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             hideTypingIndicator();
             appendMessage('morpheus', data.text_response, data.audio_response);
-            playMessageSound();
         } catch (error) {
             console.error('Error:', error);
             hideTypingIndicator();
@@ -56,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(sender, message, audioSrc = null) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
-        
+
         const avatar = document.createElement('img');
         avatar.src = sender === 'user' ? '/static/images/user-avatar.png' : '/static/images/morpheus-avatar.png';
         avatar.alt = `${sender} avatar`;
@@ -79,14 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         messageElement.appendChild(avatar);
         messageElement.appendChild(contentDiv);
-
-        const chatMessages = document.getElementById('chat-messages');
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         if (sender === 'morpheus') {
             animateMorpheusAvatar(avatar);
         }
+    }
+
+    function animateMorpheusAvatar(avatar) {
+        avatar.classList.add('talking');
+        setTimeout(() => {
+            avatar.classList.remove('talking');
+        }, 2000);
     }
 
     function playAudioResponse(base64Audio, playButton) {
@@ -106,8 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-
-    // Other functions (animateMorpheusAvatar, playMessageSound, etc.) remain unchanged
 
     function showTypingIndicator() {
         typingIndicator.classList.remove('hidden');
