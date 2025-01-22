@@ -42,12 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Start animation only when red pill is clicked
-    document.addEventListener('click', (e) => {
-        if (e.target.id === 'red-pill-btn' && !animationId) {
-            animate();
-        }
-    });
+    // Start animation only when red pill button is clicked
+    const redPillBtn = document.getElementById('red-pill-btn');
+    if (redPillBtn) {
+        redPillBtn.addEventListener('click', () => {
+            if (!animationId) {
+                animate();
+            }
+        });
+    }
 
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
