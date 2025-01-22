@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
+    let animationId = null;
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -33,10 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animate() {
         drawMatrix();
-        requestAnimationFrame(animate);
+        animationId = requestAnimationFrame(animate);
     }
 
-    animate();
+    // Clear canvas initially
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Control animation with wake-up button
+    const wakeUpButton = document.getElementById('wake-up-button');
+    wakeUpButton.addEventListener('click', () => {
+        if (animationId === null) {
+            animate();
+        }
+    });
 
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
