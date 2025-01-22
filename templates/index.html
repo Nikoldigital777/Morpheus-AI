@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpheus AI - What is Real?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-body">
+    <canvas id="matrix-canvas"></canvas>
+    <main class="content">
+        <h1 id="main-question">What is real?</h1>
+        <div class="pill-container">
+            <div class="pill-option">
+                <button id="red-pill-btn" class="pill-button red">Take the red pill</button>
+            </div>
+            <div class="pill-option">
+                <button id="blue-pill-btn" class="pill-button blue">Take the blue pill</button>
+            </div>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='js/matrix.js') }}"></script>
+    <script src="{{ url_for('static', filename='landing.js') }}"></script>
+</body>
+</html>
